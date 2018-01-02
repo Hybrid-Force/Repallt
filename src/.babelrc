@@ -1,0 +1,23 @@
+{
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 Chrome versions",
+            "last 2 Safari versions"
+          ],
+          "uglify": true
+        },
+        "debug": false
+      }
+    ],
+    "react"
+  ]
+}

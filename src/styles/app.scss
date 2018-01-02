@@ -1,0 +1,99 @@
+@charset "UTF-8";
+@import "normalize/import-now";
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #3498db !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #1abc9c !default;
+$energized:                       #f1c40f !default;
+$assertive:                       #e74c3c !default;
+$royal:                           #9b59b6 !default;
+$dark:                            #444 !default;
+$tb-orange:                       #FF692F;
+
+$facebook:  #3b5998;
+$twitter:   #00aced;
+$instagram: #517fa4;
+$tumblr:    #32506d;
+$pinterest:  #cb2027;
+
+$gray: #888888;
+$gray-light: #eaeaea;
+$gray-medium: #949494;
+$gray-dark: #494949;
+
+.App {
+  min-height: 100vh;
+  background-color: $gray-light;
+  .ContentContainer {
+    max-width: 1000px;
+    margin: auto;
+    padding-top: 50px;
+  }
+}
+
+.HeaderLeft {}
+.HeaderTabs {
+  flex: 1;
+}
+.HeaderRight {}
+
+.Login {
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .FormHeaderIcon {
+    font-size: 80px;
+  }
+}
+
+.Form{
+  padding: 40px;
+  .FormHeader {
+    .FormRow {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .FormRow {
+    margin: 10px;
+  }
+  .FormFooter {
+    .FormRow {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.Report {
+  display: flex;
+  flex-direction: row;
+  .ReportControl {
+    max-width: 250px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .Item--selected {
+      background-color: rgba(0,0,0,0.12);
+    }
+  }
+  .ReportContent {
+    flex: 1;
+    margin-left: 50px;
+  }
+}
+
+.BulletCharts {
+  background-color: white;
+  .BulletChart {
+    height: 85px;
+
+    &:first-child {
+      height: 121px;
+    }
+  }
+}
