@@ -11,6 +11,8 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var babelify = require('babelify');
+var envify = require('envify');
+var uglifyify = require('uglifyify');
 
 var Pathes = {
     HTML: 'src/index.html',
@@ -47,7 +49,11 @@ gulp.task('js', function() {
     return browserify({
         entries: Pathes.JS_ENTRY_POINT,
         debug: true,
-        transform: [babelify]
+        transform: [
+            [envify, { global: true, NODE_ENV: 'production' }],
+            [uglifyify, { global: true }],
+            babelify
+        ]
     })
         .bundle()
         .pipe(source(Pathes.OUT))

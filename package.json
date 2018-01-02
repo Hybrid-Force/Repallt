@@ -2,7 +2,7 @@
   "name": "repallt",
   "version": "0.1.0",
   "description": "Report Demo",
-  "main": "index.js",
+  "main": "index.html",
   "directories": {
     "doc": "docs"
   },
@@ -13,14 +13,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browserify": "^14.5.0",
-    "gulp": "^3.9.1",
-    "gulp-cssnano": "^2.1.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.2",
-    "gulp-uglify": "^3.0.0",
     "highcharts": "^6.0.4",
     "material-ui": "^1.0.0-beta.25",
     "normalize-scss": "^7.0.0",
@@ -34,14 +26,25 @@
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Derek Hsu",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0",
+    "envify": "^4.1.0",
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.2",
+    "gulp-uglify": "^3.0.0",
+    "uglifyify": "^4.0.5",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
 }
