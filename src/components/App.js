@@ -32,6 +32,16 @@ const theme = createMuiTheme({
     },
     status: {
         success: green
+    },
+    overrides: {
+        MuiButton: {
+            raisedPrimary: {
+                background: `linear-gradient(45deg, ${indigo.A200} 30%, ${blue[500]} 90%)`
+            },
+            raisedAccent: {
+                background: `linear-gradient(45deg, ${blue.A200} 30%, ${green.A200} 90%)`
+            }
+        }
     }
 });
 
