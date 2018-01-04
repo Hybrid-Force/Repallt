@@ -17,7 +17,7 @@ var uglifyify = require('uglifyify');
 var Pathes = {
     HTML: 'src/index.html',
     OUT: 'app.js',
-    DEST: '.',
+    DEST: 'docs',
     JS_ENTRY_POINT: 'src/app.js',
     SCSS_ENTRY_POINT: 'src/styles/app.scss',
     IMGS: 'src/images/*'

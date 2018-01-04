@@ -2,7 +2,7 @@
   "name": "repallt",
   "version": "0.1.0",
   "description": "Report Demo",
-  "main": "index.html",
+  "main": "src/app.js",
   "directories": {
     "doc": "docs"
   },
