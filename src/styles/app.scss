@@ -105,3 +105,11 @@ $gray-dark: #494949;
     }
   }
 }
+
+.Home {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}

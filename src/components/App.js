@@ -9,7 +9,6 @@ import {
 } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import AppBar from 'material-ui/AppBar';
 import Toobar from 'material-ui/Toolbar';
@@ -17,9 +16,7 @@ import Icon from 'material-ui/Icon';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Menu,  { MenuItem } from 'material-ui/Menu';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import indigo from 'material-ui/colors/indigo';
-import blue from 'material-ui/colors/blue';
-import green from 'material-ui/colors/green';
+import { indigo, blue, green } from 'material-ui/colors';
 import Reports from './Report';
 import Home from './Home';
 import Login from './Login';
