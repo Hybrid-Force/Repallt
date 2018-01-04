@@ -10,9 +10,8 @@ import ListSubheader from 'material-ui/List/ListSubheader';
 import Divider from 'material-ui/Divider';
 import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
-import Drawer from 'material-ui/Drawer';
+import { CircularProgress } from 'material-ui/Progress';
 import Icon from 'material-ui/Icon';
-import Typography from 'material-ui/Typography';
 import { withTheme } from 'material-ui/styles';
 import Exporting from 'highcharts/modules/exporting';
 import Bullet from 'highcharts/modules/bullet';
@@ -185,6 +184,14 @@ const styles = theme => ({
     }
 });
 
+function DummyLoadingChart(props) {
+    return (
+        <div className="DummyLoadingChart">
+            <CircularProgress/>
+        </div>
+    );
+}
+
 function BulletChart(props) {
     let completeRatio = props.y / props.target * 100;
     let growth = (props.y - props.compare) / props.compare * 100;
@@ -257,7 +264,7 @@ function RevenueByTherapy(props) {
         <div className='BulletCharts'>
             <BulletChart
                 title='Sales Revenue (Million CNY)'
-                xAxis='Oncolog'
+                xAxis='Oncology'
                 compare={800}
                 y={900}
                 target={890}
@@ -298,19 +305,19 @@ function MarketByTherapy(props) {
                     categories: ['AZ', 'Bayer', 'Roche', 'MSD', 'Pfizer']
                 },
                 yAxis: {
-                    categories: ['Oncolog', 'Neuroscience', 'Cardiovascular', 'Ophthalmology'],
+                    categories: ['Oncology', 'Neuroscience', 'Cardiovascular', 'Ophthalmology'],
                     title: null
                 },
                 colorAxis: {
                     min: 0,
-                    minColor: 'white'
+                    minColor: '#ffffff',
+                    reversed: false
                 },
                 legend: {
                     align: 'right',
                     layout: 'vertical',
                     verticalAlign: 'middle',
                 },
-
                 tooltip: {
                     formatter: function () {
                         return `<b>${this.series.xAxis.categories[this.point.x]}</b> in <b>${this.series.yAxis.categories[this.point.y]}</b>:<br> <b>${this.point.value}%</b>`;
@@ -334,15 +341,22 @@ function MarketByTherapy(props) {
     );
 }
 
-function RevenueMarketByTherapy(props) {
+export function RevenueMarketByTherapy(props) {
     return (
         <ReactHighcharts
             config={{
                 chart: {
-                    type: 'scatter'
+                    type: 'scatter',
+                    height: props.aspectRatio || null
                 },
                 title: {
-                    text: 'Goal Attainment and Market Share by Therapy Area'
+                    text: props.compact ? '' : 'Goal Attainment and Market Share by Therapy Area'
+                },
+                legend: {
+                    enabled: !props.compact
+                },
+                exporting: {
+                    enabled: !props.compact
                 },
                 plotOptions: {
                     scatter: {
@@ -355,6 +369,7 @@ function RevenueMarketByTherapy(props) {
                         }
                     }
                 },
+
                 xAxis: {
                     min: -2,
                     max: 2,
@@ -373,10 +388,10 @@ function RevenueMarketByTherapy(props) {
                 },
                 yAxis: {
                     min: 0,
-                    max: 110,
+                    max: 200,
                     plotBands: [{
                         color: 'rgba(76, 175, 80, 0.2)',
-                        from: 50,
+                        from: 100,
                         to: 200
                     }],
                     title: {
@@ -384,17 +399,97 @@ function RevenueMarketByTherapy(props) {
                     }
                 },
                 series: [{
-                    name: 'Oncolog',
-                    data: [[1.3, 101]]
+                    name: 'Oncology',
+                    data: [[1.3, 181]]
                 }, {
                     name: 'Neuroscience',
                     data: [[0.2, 83]]
                 }, {
                     name: 'Cardiovascular',
-                    data: [[-1.5, 95]]
+                    data: [[-1.5, 135]]
                 }, {
                     name: 'Ophthalmology',
                     data: [[-0.3, 79]]
+                }, {
+                    // working as label
+                    data: [[1.9, 190]],
+                    dataLabels: {
+                        enabled: true,
+                        format: 'A',
+                        style: {
+                            color: 'white',
+                            fontSize: '12px',
+                            textOutline: 'none'
+                        },
+                        allowOverlap: true,
+                        verticalAlign: 'middle',
+                        backgroundColor: 'rgba(0,0,0,0.25)'
+                    },
+                    showInLegend: false,
+                    enableMouseTracking: false,
+                    marker: {
+                        enabled: false
+                    }
+                }, {
+                    // working as label
+                    data: [[-1.9, 190]],
+                    dataLabels: {
+                        enabled: true,
+                        format: 'B',
+                        style: {
+                            color: 'white',
+                            fontSize: '12px',
+                            textOutline: 'none'
+                        },
+                        allowOverlap: true,
+                        verticalAlign: 'middle',
+                        backgroundColor: 'rgba(0,0,0,0.25)',
+                    },
+                    showInLegend: false,
+                    enableMouseTracking: false,
+                    marker: {
+                        enabled: false
+                    }
+                }, {
+                    // working as label
+                    data: [[1.9, 10]],
+                    dataLabels: {
+                        enabled: true,
+                        format: 'C',
+                        style: {
+                            color: 'white',
+                            fontSize: '12px',
+                            textOutline: 'none'
+                        },
+                        allowOverlap: true,
+                        verticalAlign: 'middle',
+                        backgroundColor: 'rgba(0,0,0,0.25)'
+                    },
+                    showInLegend: false,
+                    enableMouseTracking: false,
+                    marker: {
+                        enabled: false
+                    }
+                }, {
+                    // working as label
+                    data: [[-1.9, 10]],
+                    dataLabels: {
+                        enabled: true,
+                        format: 'D',
+                        style: {
+                            color: 'white',
+                            fontSize: '12px',
+                            textOutline: 'none'
+                        },
+                        allowOverlap: true,
+                        verticalAlign: 'middle',
+                        backgroundColor: 'rgba(0,0,0,0.25)'
+                    },
+                    showInLegend: false,
+                    enableMouseTracking: false,
+                    marker: {
+                        enabled: false
+                    }
                 }]
             }}
         />
@@ -413,7 +508,7 @@ function ProductivityByTherapy(props) {
                 },
                 xAxis: {
                     categories: [
-                        'Oncolog',
+                        'Oncology',
                         'Neuroscience',
                         'Cardiovascular',
                         'Ophthalmology'
@@ -463,7 +558,7 @@ function ROIByTherapy(props) {
                 },
                 xAxis: {
                     categories: [
-                        'Oncolog',
+                        'Oncology',
                         'Neuroscience',
                         'Cardiovascular',
                         'Ophthalmology'
@@ -501,21 +596,28 @@ function ROIByTherapy(props) {
 }
 ROIByTherapy = withTheme()(ROIByTherapy);
 
-function ProductivityCompaRatioByTherapy(props) {
+export function ProductivityCompensationByTherapy(props) {
     return (
         <ReactHighcharts
             config={{
                 chart: {
-                    type: 'scatter'
+                    type: 'scatter',
+                    height: props.aspectRatio || null
                 },
                 title: {
-                    text: 'Productivity and Compa-ratio by Therapy Area'
+                    text: props.compact ? '' : 'Sales Productivity and Compensation by Therapy Area'
+                },
+                legend: {
+                    enabled: !props.compact
+                },
+                exporting: {
+                    enabled: !props.compact
                 },
                 plotOptions: {
                     scatter: {
                         tooltip: {
                             headerFormat: '<b>{series.name}</b><br>',
-                            pointFormat: 'Compa-ratio: <b>{point.x}</b>%<br>Productivity: <b>{point.y}%</b>'
+                            pointFormat: 'Compensation: <b>{point.x}K</b> CNY<br>Productivity: <b>{point.y}%</b>'
                         },
                         marker: {
                             radius: 10
@@ -523,46 +625,125 @@ function ProductivityCompaRatioByTherapy(props) {
                     }
                 },
                 xAxis: {
-                    min: 70,
-                    max: 110,
+                    min: 0,
+                    max: 200,
                     title: {
-                        text: 'Compa-ratio (%)'
+                        text: 'Compensation (Thousand CNY)'
+                    },
+                    plotLines: [{
+                        color: props.theme.palette.grey[500],
+                        width: 1,
+                        dashStyle: 'Dot',
+                        value: 120
+                    }, {
+                        color: props.theme.palette.grey[500],
+                        dashStyle: 'Dot',
+                        width: 1,
+                        value: 150
+                    }, {
+                        color: props.theme.palette.grey[500],
+                        dashStyle: 'Dot',
+                        width: 1,
+                        value: 180
+                    }],
+                    gridLineDashStyle: 'Dot',
+                    gridLineWidth: 0,
+                    tickPositions: [0, 120, 150, 180, 200],
+                    labels: {
+                        formatter: function() {
+                            const tickMap = {
+                                120: 25,
+                                150: 50,
+                                180: 75
+                            };
+                            let percentile = tickMap[this.value];
+                            if (percentile) {
+                                return `percentile ${tickMap[this.value]}`;
+                            } else {
+                                return '';
+                            }
+                        },
+                        rotation: props.compact ? -45 : undefined
                     }
                 },
                 yAxis: {
-                    min: 70,
-                    max: 110,
+                    min: 0,
+                    max: 500,
+                    gridLineWidth: 0,
                     title: {
                         text: 'Productivity (%)'
+                    },
+                    plotLines: [{
+                        color: props.theme.palette.grey[500],
+                        width: 1,
+                        dashStyle: 'Dot',
+                        value: 180
+                    }, {
+                        color: props.theme.palette.grey[500],
+                        width: 1,
+                        dashStyle: 'Dot',
+                        value: 250
+                    }, {
+                        color: props.theme.palette.grey[500],
+                        width: 1,
+                        dashStyle: 'Dot',
+                        value: 300
+                    }],
+                    lineWidth: 1,
+                    tickWidth: 1,
+                    tickPositions: [0, 180, 250, 300, 400],
+                    labels: {
+                        formatter: function() {
+                            const tickMap = {
+                                180: 25,
+                                250: 50,
+                                300: 75
+                            };
+                            let percentile = tickMap[this.value];
+                            if (percentile) {
+                                return `percentile ${tickMap[this.value]}`;
+                            } else {
+                                return '';
+                            }
+                        },
+                        rotation: props.compact ? -45 : undefined
                     }
                 },
                 series: [{
-                    name: 'Oncolog',
-                    data: [[98, 106]]
+                    name: 'Oncology',
+                    data: [[180, 361]]
                 }, {
                     name: 'Neuroscience',
-                    data: [[92, 89]]
+                    data: [[140, 295]]
                 }, {
                     name: 'Cardiovascular',
-                    data: [[94, 94]]
+                    data: [[150, 263]]
                 }, {
                     name: 'Ophthalmology',
-                    data: [[88, 82]]
+                    data: [[100, 156]]
                 }]
             }}
         />
     );
 }
+ProductivityCompensationByTherapy = withTheme()(ProductivityCompensationByTherapy);
 
-function TurnoverByPerformanceDistribution(props) {
+export function TurnoverByPerformanceDistribution(props) {
     return (
         <ReactHighcharts
             config={{
                 chart: {
-                    type: 'areaspline'
+                    type: 'areaspline',
+                    height: props.aspectRatio || null
                 },
                 title: {
-                    text: 'Turnover and Performance'
+                    text: props.compact ? '' : 'Turnover and Performance'
+                },
+                legend: {
+                    enabled: !props.compact
+                },
+                exporting: {
+                    enabled: !props.compact
                 },
                 xAxis: {
                     categories: [
@@ -574,6 +755,9 @@ function TurnoverByPerformanceDistribution(props) {
                         '91%-100%',
                         'Above 100%'
                     ],
+                    title: {
+                        text: 'Performance'
+                    },
                     crosshair: true
                 },
                 yAxis: {
@@ -581,12 +765,74 @@ function TurnoverByPerformanceDistribution(props) {
                         text: 'Number of Sales Forces'
                     }
                 },
+                tooltip: {
+                    shared: true
+                },
                 series: [{
                     name: 'Stay',
                     data: [4, 8, 6, 34, 48, 14, 6]
                 }, {
                     name: 'Leave',
                     data: [2, 3, 1, 7, 9, 1, 1]
+                }]
+            }}
+        />
+    );
+}
+
+export function PerformanceDistributionByPayout(props) {
+    return (
+        <ReactHighcharts
+            config={{
+                chart: {
+                    height: props.aspectRatio || null
+                },
+                title: {
+                    text: props.compact ? '' : 'Performance Distribution by Payout'
+                },
+                legend: {
+                    enabled: !props.compact
+                },
+                exporting: {
+                    enabled: !props.compact
+                },
+                xAxis: {
+                    categories: [
+                        'Below 50%',
+                        '51%-60%',
+                        '61%-70%',
+                        '71%-80%',
+                        '81%-90%',
+                        '91%-100%',
+                        'Above 100%'
+                    ],
+                    title: {
+                        text: 'Performance'
+                    },
+                    crosshair: true
+                },
+                yAxis: [{
+                    title: {
+                        text: 'Number of Sales Forces'
+                    }
+                }, {
+                    title: {
+                        text: 'Average Payout'
+                    },
+                    opposite: true
+                }],
+                tooltip: {
+                    shared: true
+                },
+                series: [{
+                    type: 'column',
+                    name: 'Sales force number',
+                    data: [2, 5, 6, 27, 39, 13, 5]
+                }, {
+                    type: 'line',
+                    name: 'Average payout',
+                    yAxis: 1,
+                    data: [78000, 96700, 112300, 135000, 169500, 194000, 254000]
                 }]
             }}
         />
@@ -629,7 +875,7 @@ class PerformanceReport extends Report {
         } else if (this.metrics[2] in this.state.metric && this.dimensions[1] in this.state.dimension) {
             chart = <MarketByTherapy/>;
         } else {
-            chart = <DummyChart/>;
+            chart = <DummyLoadingChart/>;
         }
         return (
             <div className="Report">
@@ -650,7 +896,7 @@ class ProductivityReport extends Report {
     metrics = [
         'Productivity',
         'ROI',
-        'Productivity VS. Compa-ratio'
+        'Productivity VS. Compensation'
     ];
     dimensions = [
         'Region',
@@ -660,14 +906,14 @@ class ProductivityReport extends Report {
     ];
     render() {
         let chart;
-        if (this.metrics[0] in this.state.metric && this.metrics[2] in this.state.metric && this.dimensions[1] in this.state.dimension) {
-            chart = <ProductivityCompaRatioByTherapy/>
-        } else if (this.metrics[0] in this.state.metric && this.dimensions[1] in this.state.dimension) {
+        if (this.metrics[0] in this.state.metric && this.dimensions[1] in this.state.dimension) {
             chart = <ProductivityByTherapy/>;
         } else if (this.metrics[1] in this.state.metric && this.dimensions[1] in this.state.dimension) {
             chart = <ROIByTherapy/>;
+        } if (this.metrics[2] in this.state.metric && this.dimensions[1] in this.state.dimension) {
+            chart = <ProductivityCompensationByTherapy/>
         } else {
-            chart = <DummyChart/>;
+            chart = <DummyLoadingChart/>;
         }
         return (
             <div className="Report">
@@ -701,12 +947,10 @@ class EngagementReport extends Report {
         let chart;
         if (this.metrics[0] in this.state.metric && this.metrics[2] in this.state.metric) {
             chart = <TurnoverByPerformanceDistribution/>
-        } else if (this.metrics[0] in this.state.metric && this.dimensions[1] in this.state.dimension) {
-            chart = <ProductivityByTherapy/>;
-        } else if (this.metrics[1] in this.state.metric && this.dimensions[1] in this.state.dimension) {
-            chart = <ROIByTherapy/>;
-        } else {
-            chart = <DummyChart/>;
+        } else if (this.metrics[2] in this.state.metric && this.metrics[3] in this.state.metric) {
+            chart = <PerformanceDistributionByPayout/>;
+        }  else {
+            chart = <DummyLoadingChart/>;
         }
         return (
             <div className="Report">

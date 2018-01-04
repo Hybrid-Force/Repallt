@@ -87,6 +87,14 @@ $gray-dark: #494949;
   }
 }
 
+.DummyLoadingChart {
+  background-color: white;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .BulletCharts {
   background-color: white;
   .BulletChart {
