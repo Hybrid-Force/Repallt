@@ -432,7 +432,7 @@ export function RevenueMarketByTherapy(props) {
                     }
                 }, {
                     // working as label
-                    data: [[-1.9, 190]],
+                    data: [[1.9, 10]],
                     dataLabels: {
                         enabled: true,
                         format: 'B',
@@ -452,7 +452,7 @@ export function RevenueMarketByTherapy(props) {
                     }
                 }, {
                     // working as label
-                    data: [[1.9, 10]],
+                    data: [[-1.9, 190]],
                     dataLabels: {
                         enabled: true,
                         format: 'C',
@@ -617,7 +617,7 @@ export function ProductivityCompensationByTherapy(props) {
                     scatter: {
                         tooltip: {
                             headerFormat: '<b>{series.name}</b><br>',
-                            pointFormat: 'Compensation: <b>{point.x}K</b> CNY<br>Productivity: <b>{point.y}%</b>'
+                            pointFormat: 'Compensation: <b>{point.x}K</b> CNY<br>Productivity: <b>{point.y}</b>'
                         },
                         marker: {
                             radius: 10
@@ -668,36 +668,36 @@ export function ProductivityCompensationByTherapy(props) {
                 },
                 yAxis: {
                     min: 0,
-                    max: 500,
+                    max: 5,
                     gridLineWidth: 0,
                     title: {
-                        text: 'Productivity (%)'
+                        text: 'Productivity'
                     },
                     plotLines: [{
                         color: props.theme.palette.grey[500],
                         width: 1,
                         dashStyle: 'Dot',
-                        value: 180
+                        value: 1.80
                     }, {
                         color: props.theme.palette.grey[500],
                         width: 1,
                         dashStyle: 'Dot',
-                        value: 250
+                        value: 2.50
                     }, {
                         color: props.theme.palette.grey[500],
                         width: 1,
                         dashStyle: 'Dot',
-                        value: 300
+                        value: 3.00
                     }],
                     lineWidth: 1,
                     tickWidth: 1,
-                    tickPositions: [0, 180, 250, 300, 400],
+                    tickPositions: [0, 1.80, 2.50, 3.00, 4.00],
                     labels: {
                         formatter: function() {
                             const tickMap = {
-                                180: 25,
-                                250: 50,
-                                300: 75
+                                1.80: 25,
+                                2.50: 50,
+                                3.00: 75
                             };
                             let percentile = tickMap[this.value];
                             if (percentile) {
@@ -711,16 +711,16 @@ export function ProductivityCompensationByTherapy(props) {
                 },
                 series: [{
                     name: 'Oncology',
-                    data: [[180, 361]]
+                    data: [[180, 3.61]]
                 }, {
                     name: 'Neuroscience',
-                    data: [[140, 295]]
+                    data: [[140, 2.95]]
                 }, {
                     name: 'Cardiovascular',
-                    data: [[150, 263]]
+                    data: [[150, 2.63]]
                 }, {
                     name: 'Ophthalmology',
-                    data: [[100, 156]]
+                    data: [[100, 1.56]]
                 }]
             }}
         />
@@ -829,7 +829,7 @@ export function PerformanceDistributionByPayout(props) {
                     name: 'Sales force number',
                     data: [2, 5, 6, 27, 39, 13, 5]
                 }, {
-                    type: 'line',
+                    type: 'spline',
                     name: 'Average payout',
                     yAxis: 1,
                     data: [78000, 96700, 112300, 135000, 169500, 194000, 254000]
@@ -910,7 +910,7 @@ class ProductivityReport extends Report {
             chart = <ProductivityByTherapy/>;
         } else if (this.metrics[1] in this.state.metric && this.dimensions[1] in this.state.dimension) {
             chart = <ROIByTherapy/>;
-        } if (this.metrics[2] in this.state.metric && this.dimensions[1] in this.state.dimension) {
+        } else if (this.metrics[2] in this.state.metric && this.dimensions[1] in this.state.dimension) {
             chart = <ProductivityCompensationByTherapy/>
         } else {
             chart = <DummyLoadingChart/>;
