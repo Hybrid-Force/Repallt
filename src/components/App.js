@@ -20,6 +20,7 @@ import { indigo, blue, green } from 'material-ui/colors';
 import Reports from './Report';
 import Home from './Home';
 import Login from './Login';
+import { Logo } from './Logo';
 import { logout } from '../redux/actions';
 
 const theme = createMuiTheme({
@@ -106,8 +107,12 @@ export default class App extends Component {
                     <div className='App'>
                         <AppBar position="static">
                             <Toobar>
+                                <Logo style={{
+                                    fill: theme.palette.common.lightWhite,
+                                    height: 32
+                                }}/>
                                 <IconButton>
-                                    <Icon>menu</Icon>
+                                    <Icon color="disabled">more_vert</Icon>
                                 </IconButton>
                                 <div className="HeaderTabs">
                                     <Switch>

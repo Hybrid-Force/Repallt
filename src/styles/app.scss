@@ -72,6 +72,8 @@ $gray-dark: #494949;
 .Report {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+
   .ReportControl {
     max-width: 250px;
     padding-left: 10px;

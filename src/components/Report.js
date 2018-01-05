@@ -10,7 +10,6 @@ import ListSubheader from 'material-ui/List/ListSubheader';
 import Divider from 'material-ui/Divider';
 import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
-import { CircularProgress } from 'material-ui/Progress';
 import Icon from 'material-ui/Icon';
 import { withTheme } from 'material-ui/styles';
 import Exporting from 'highcharts/modules/exporting';
@@ -18,6 +17,7 @@ import Bullet from 'highcharts/modules/bullet';
 import Heatmap from 'highcharts/modules/heatmap';
 import HighchartsMore from 'highcharts/highcharts-more';
 import ReactHighcharts from 'react-highcharts';
+import { LogoWithText } from './Logo';
 
 Exporting(ReactHighcharts.Highcharts);
 HighchartsMore(ReactHighcharts.Highcharts);
@@ -112,12 +112,6 @@ class ReportControl extends Component {
     }
 }
 
-function LoadingChart() {
-    return (
-        <div></div>
-    );
-}
-
 function DummyChart(props) {
     return (
         <ReactHighcharts config={{
@@ -187,10 +181,16 @@ const styles = theme => ({
 function DummyLoadingChart(props) {
     return (
         <div className="DummyLoadingChart">
-            <CircularProgress/>
+            <LogoWithText
+                style={{
+                    width: 150,
+                    fill: props.theme.palette.grey[400]
+                }}
+            />
         </div>
     );
 }
+DummyLoadingChart = withTheme()(DummyLoadingChart);
 
 function BulletChart(props) {
     let completeRatio = props.y / props.target * 100;
